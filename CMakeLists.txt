@@ -3,23 +3,27 @@ project(GOL)
 
 set(CMAKE_CXX_STANDARD 23)
 
-# Find SDL2 and SDL2_image libraries
-find_package(SDL2 REQUIRED)
+# Add directories libraries
+set(CMAKE_PREFIX_PATH "C:/SDK/sdl2;C:/SDK/SDL2_image")
+
+# Find libraries
 find_package(SDL2_image REQUIRED)
+find_package(SDL2 REQUIRED)
 
-# Add include directories for SDL2 and SDL2_image
-include_directories(${SDL2_INCLUDE_DIRS} ${SDL2_IMAGE_INCLUDE_DIRS})
+# Add include directories
+include_directories(${SDL2_IMAGE_INCLUDE_DIRS})
+include_directories(${SDL2_INCLUDE_DIRS})
 
-# Add your source files
+# Source files
 set(SOURCES
         EventHandler.cpp
-        GOL.cpp
         main.cpp
         Renderer.cpp
+        GOL.cpp
 )
 
 # Add executable
-add_executable(YourExecutable ${SOURCES})
+add_executable(gol ${SOURCES})
 
-# Link against SDL2 and SDL2_image libraries
-target_link_libraries(YourExecutable ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARIES})
+# Link against libraries
+target_link_libraries(gol ${SDL2_IMAGE_LIBRARIES} ${SDL2_LIBRARIES})

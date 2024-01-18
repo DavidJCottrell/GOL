@@ -35,10 +35,10 @@ void EventHandler::handleEvents(GOL* gol, bool* play) {
             std::cout << "-- Grid cleared" << std::endl;
             break;
         case SDLK_q:
-            gol->premade(gol->PremadeShape::Perimiter);
+            gol->premade(1);
             break;
         case SDLK_w:
-            gol->premade(gol->PremadeShape::VerticalLineMiddle);
+            gol->premade(2);
             break;
         default:
             break;
@@ -58,11 +58,11 @@ void EventHandler::handleClick(GOL* gol, int key) {
     SDL_GetMouseState(&xMouse, &yMouse); //Get current mouse coordinates
 
     //repeat for number of rows and columns
-    for (int x = 0; x < gol->grid_width / gol->grid_gap; x++) {
-        for (int y = 0; y < gol->grid_height / gol->grid_gap; y++) {
-            //Check if clicked within limits of cell            
-            if (xMouse < gol->grid[x][y].limit_x && xMouse > gol->grid[x][y].limit_x - gol->grid_gap) {
-                if (yMouse < gol->grid[x][y].limit_y && yMouse > gol->grid[x][y].limit_y - gol->grid_gap) {
+    for (int x = 0; x < GOL::grid_width / GOL::grid_gap; x++) {
+        for (int y = 0; y < GOL::grid_height / GOL::grid_gap; y++) {
+            //Check if clicked within limits of cell
+            if (xMouse < gol->grid[x][y].limit_x && xMouse > gol->grid[x][y].limit_x - GOL::grid_gap) {
+                if (yMouse < gol->grid[x][y].limit_y && yMouse > gol->grid[x][y].limit_y - GOL::grid_gap) {
                     if (key == SDL_BUTTON_LEFT) gol->grid[x][y].active = true;
                     else gol->grid[x][y].active = false;
                 }

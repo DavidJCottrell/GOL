@@ -21,14 +21,14 @@ GOL::~GOL() {
     std::cout << "\n--------------------------- " << std::endl;
 }
 
-void GOL::premade(PremadeShape shape) {
-    if (shape == PremadeShape::Perimiter) {
+void GOL::premade(int shape) {
+    if (shape == 1) {
         for (int x = 0; x < grid_width / grid_gap; x++)
             for (int y = 0; y < grid_height / grid_gap; y++)
                 if (x == 0 || y == 0 || x == grid_width / grid_gap - 1 || y == grid_height / grid_gap - 1)
                     grid[x][y].active = true;
     }
-    else if (shape == PremadeShape::VerticalLineMiddle) {
+    else if (shape == 2) {
         for (int x = 0; x < grid_width / grid_gap; x++)
             for (int y = 0; y < grid_height / grid_gap; y++)
                 if (x == (grid_width / grid_gap - 1) / 2)

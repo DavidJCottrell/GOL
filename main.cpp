@@ -10,11 +10,11 @@ int main(int argc, char* args[]) {
     GOL* gol = new GOL();
     EventHandler eventHandler;
     Renderer renderer(
-        "Game of Life", 
-        SDL_WINDOWPOS_CENTERED, 
-        SDL_WINDOWPOS_CENTERED, 
-        gol->grid_width, 
-        gol->grid_height
+        "Game of Life",
+        SDL_WINDOWPOS_CENTERED,
+        SDL_WINDOWPOS_CENTERED,
+        GOL::grid_width,
+        GOL::grid_height
     );
 
     std::thread eventHandlerThread([&]() {

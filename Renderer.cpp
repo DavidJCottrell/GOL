@@ -22,13 +22,13 @@ void Renderer::DrawGrid(GOL* gol) {
     SDL_SetRenderDrawColor(renderer, 0, 255, 0, SDL_ALPHA_OPAQUE);
 
     //Update for clicked alive cells
-    for (int x = 0; x < gol->grid_width / gol->grid_gap; x++) {
-        for (int y = 0; y < gol->grid_height / gol->grid_gap; y++) {
+    for (int x = 0; x < GOL::grid_width / GOL::grid_gap; x++) {
+        for (int y = 0; y < GOL::grid_height / GOL::grid_gap; y++) {
             if (gol->grid[x][y].active) {
                 SDL_Rect rect = {
-                    gol->grid[x][y].limit_x - gol->grid_gap, //location x
-                    gol->grid[x][y].limit_y - gol->grid_gap, //location y
-                    gol->grid_gap, gol->grid_gap //h, w
+                    gol->grid[x][y].limit_x - GOL::grid_gap, //location x
+                    gol->grid[x][y].limit_y - GOL::grid_gap, //location y
+                    GOL::grid_gap, GOL::grid_gap //h, w
                 };
                 SDL_RenderFillRect(renderer, &rect);
             }
@@ -44,7 +44,7 @@ void Renderer::render(GOL* gol) {
     DrawGrid(gol);
     if (gol->isStarted) {
         gol->tick();
-        std::this_thread::sleep_for(std::chrono::milliseconds(gol->gameSpeed));
+        std::this_thread::sleep_for(std::chrono::milliseconds(GOL::gameSpeed));
     }
 }
 

@@ -20,14 +20,9 @@ public:
         bool active;
     };
 
-    static enum PremadeShape {
-        VerticalLineMiddle,
-        Perimiter,
-    };
-
     void tick();
     void clearGrid();
-    void premade(PremadeShape shape); //Draw premade configurations
+    void premade(int shape); //Draw premade configurations
 
     static const int grid_width = 640;
     static const int grid_height = 480;
@@ -35,6 +30,6 @@ public:
     static const unsigned int gameSpeed = 100;
     bool isStarted = false;
 
-    cell grid[grid_width / grid_gap][grid_height / grid_gap]; 
+    cell grid[grid_width / grid_gap][grid_height / grid_gap];
 };
 
