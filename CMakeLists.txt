@@ -23,7 +23,7 @@ set(SOURCES
 )
 
 # Add executable
-add_executable(gol ${SOURCES})
+add_executable(GOL ${SOURCES})
 
 # Link against libraries
-target_link_libraries(gol ${SDL2_IMAGE_LIBRARIES} ${SDL2_LIBRARIES})
+target_link_libraries(GOL ${SDL2_MAIN_LIBRARIES} ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARIES})

@@ -1,5 +1,7 @@
 #include "GOL.h"
 
+const unsigned int GOL::gameSpeed;
+
 GOL::GOL() {
 
     //Fill grid array with square structs
