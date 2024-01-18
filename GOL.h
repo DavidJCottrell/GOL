@@ -14,31 +14,30 @@ public:
 	~GOL();
 
     struct cell {
-        int limit_x;
-        int limit_y;
+        int limitX;
+        int limitY;
         int x; // X position in grid
         int y; // Y position in grid
         bool active;
     };
 
-
-    void clearGrid();
+    void clearGrid() const;
     void premade(int shape) const; //Draw premade configurations
 
-    int grid_width;
-    int grid_height;
-    int grid_gap;
+    int gridWidth;
+    int gridHeight;
+    int cellSize;
     unsigned int gameSpeed;
     bool isStarted = false;
 
     cell* grid{};
 
-    void tick();
+    void tick() const;
 
 private:
     static const int defaultGridWidth = 640;
     static const int defaultGridHeight = 480;
-    static const int defaultGridGap = 10;
+    static const int defaultCellSize = 10;
     static const unsigned int defaultGameSpeed = 100;
     void initializeGrid();
 };

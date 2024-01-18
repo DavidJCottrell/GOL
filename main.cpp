@@ -7,17 +7,24 @@
 
 int main(int argc, char* args[]) {
     bool play = true;
-    GOL* gol = new GOL(640, 480, 10, 100);
+
+    int const cellSize = 15;
+    int const width = cellSize * 64;
+    int const height = cellSize * 48;
+    int const gameSpeed = 100; // 100ms delay between updates
+
+    GOL* gol = new GOL(width, height, cellSize, gameSpeed);
+
     EventHandler eventHandler;
     Renderer renderer(
         "Game of Life",
         SDL_WINDOWPOS_CENTERED,
         SDL_WINDOWPOS_CENTERED,
-        gol->grid_width,
-        gol->grid_height
+        gol->gridWidth,
+        gol->gridHeight
     );
 
-    std::thread eventHandlerThread([&]() {
+    std::thread renderThread([&]() {
         while (play) {
             renderer.render(gol);
         }
@@ -33,7 +40,7 @@ int main(int argc, char* args[]) {
         eventHandler.handleEvents(gol, &play);
     }
 
-    eventHandlerThread.join();
+    renderThread.join();
 
     delete gol;
 

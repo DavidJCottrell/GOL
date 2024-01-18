@@ -58,14 +58,14 @@ void EventHandler::handleClick(GOL* gol, int key) {
     SDL_GetMouseState(&xMouse, &yMouse); // Get current mouse coordinates
 
     // Repeat for the number of rows and columns
-    for (int x = 0; x < gol->grid_width / gol->grid_gap; x++) {
-        for (int y = 0; y < gol->grid_height / gol->grid_gap; y++) {
+    for (int x = 0; x < gol->gridWidth / gol->cellSize; x++) {
+        for (int y = 0; y < gol->gridHeight / gol->cellSize; y++) {
             // Calculate the index in the 1D array
-            int index = x * (gol->grid_height / gol->grid_gap) + y;
+            int index = x * (gol->gridHeight / gol->cellSize) + y;
 
             // Check if clicked within limits of cell
-            if (xMouse < gol->grid[index].limit_x && xMouse > gol->grid[index].limit_x - gol->grid_gap) {
-                if (yMouse < gol->grid[index].limit_y && yMouse > gol->grid[index].limit_y - gol->grid_gap) {
+            if (xMouse < gol->grid[index].limitX && xMouse > gol->grid[index].limitX - gol->cellSize) {
+                if (yMouse < gol->grid[index].limitY && yMouse > gol->grid[index].limitY - gol->cellSize) {
                     if (key == SDL_BUTTON_LEFT) gol->grid[index].active = true;
                     else gol->grid[index].active = false;
                 }

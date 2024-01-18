@@ -4,33 +4,33 @@ void Renderer::DrawGrid(GOL* gol) {
     SDL_SetRenderDrawColor(renderer, 35, 35, 35, SDL_ALPHA_OPAQUE);
 
     // Draw vertical lines
-    for (int x = 1; x * gol->grid_gap <= gol->grid_width; x++) {
+    for (int x = 1; x * gol->cellSize <= gol->gridWidth; x++) {
         SDL_RenderDrawLine(renderer,
-                           x * gol->grid_gap, 0,
-                           x * gol->grid_gap, gol->grid_height
+                           x * gol->cellSize, 0,
+                           x * gol->cellSize, gol->gridHeight
         );
     }
     // Draw horizontal lines
-    for (int y = 1; y * gol->grid_gap <= gol->grid_height; y++) {
+    for (int y = 1; y * gol->cellSize <= gol->gridHeight; y++) {
         SDL_RenderDrawLine(renderer,
-                           0, y * gol->grid_gap,
-                           gol->grid_width, y * gol->grid_gap
+                           0, y * gol->cellSize,
+                           gol->gridWidth, y * gol->cellSize
         );
     }
 
     SDL_SetRenderDrawColor(renderer, 0, 255, 0, SDL_ALPHA_OPAQUE);
 
     // Update for clicked alive cells
-    for (int x = 0; x < gol->grid_width / gol->grid_gap; x++) {
-        for (int y = 0; y < gol->grid_height / gol->grid_gap; y++) {
+    for (int x = 0; x < gol->gridWidth / gol->cellSize; x++) {
+        for (int y = 0; y < gol->gridHeight / gol->cellSize; y++) {
             // Calculate the index in the 1D array
-            int index = x * (gol->grid_height / gol->grid_gap) + y;
+            int index = x * (gol->gridHeight / gol->cellSize) + y;
 
             if (gol->grid[index].active) {
                 SDL_Rect rect = {
-                        gol->grid[index].limit_x - gol->grid_gap, // location x
-                        gol->grid[index].limit_y - gol->grid_gap, // location y
-                        gol->grid_gap, gol->grid_gap // h, w
+                        gol->grid[index].limitX - gol->cellSize, // location x
+                        gol->grid[index].limitY - gol->cellSize, // location y
+                        gol->cellSize, gol->cellSize // h, w
                 };
                 SDL_RenderFillRect(renderer, &rect);
             }
@@ -55,8 +55,7 @@ Renderer::Renderer(const char* title, int xpos, int ypos, int width, int height)
 
     // Initialize SDL2
     if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
-        printf("SDL could not initialize! SDL_Error: %s\n", SDL_GetError());
-        // Exit if error
+        throw std::runtime_error("SDL could not initialize! SDL_Error: " + std::string(SDL_GetError()));
     }
 
     Uint32 window_flags = SDL_WINDOW_OPENGL | SDL_WINDOW_ALWAYS_ON_TOP;
@@ -64,14 +63,12 @@ Renderer::Renderer(const char* title, int xpos, int ypos, int width, int height)
     // Create an application window with the following settings:
     window = SDL_CreateWindow(title, xpos, ypos, width, height, window_flags);
     if (window == nullptr) {
-        printf("Window could not be created! SDL_Error: %s\n", SDL_GetError());
-        // Exit if error
+        throw std::runtime_error("Window could not be created! SDL_Error: " + std::string(SDL_GetError()));
     }
 
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
     if (renderer == nullptr) {
-        printf("Could not create renderer! SDL_Error: %s\n", SDL_GetError());
-        // Exit if error
+        throw std::runtime_error("Could not create renderer! SDL_Error: " + std::string(SDL_GetError()));
     }
 }
 
