@@ -1,34 +1,36 @@
 #include "Renderer.h"
 
 void Renderer::DrawGrid(GOL* gol) {
-
     SDL_SetRenderDrawColor(renderer, 35, 35, 35, SDL_ALPHA_OPAQUE);
 
-    //Draw vertical lines
+    // Draw vertical lines
     for (int x = 1; x * gol->grid_gap <= gol->grid_width; x++) {
         SDL_RenderDrawLine(renderer,
-            x * gol->grid_gap, 0,
-            x * gol->grid_gap, gol->grid_height
+                           x * gol->grid_gap, 0,
+                           x * gol->grid_gap, gol->grid_height
         );
     }
-    //Draw horizontal lines
+    // Draw horizontal lines
     for (int y = 1; y * gol->grid_gap <= gol->grid_height; y++) {
         SDL_RenderDrawLine(renderer,
-            0, y * gol->grid_gap,
-            gol->grid_width, y * gol->grid_gap
+                           0, y * gol->grid_gap,
+                           gol->grid_width, y * gol->grid_gap
         );
     }
 
     SDL_SetRenderDrawColor(renderer, 0, 255, 0, SDL_ALPHA_OPAQUE);
 
-    //Update for clicked alive cells
-    for (int x = 0; x < GOL::grid_width / GOL::grid_gap; x++) {
-        for (int y = 0; y < GOL::grid_height / GOL::grid_gap; y++) {
-            if (gol->grid[x][y].active) {
+    // Update for clicked alive cells
+    for (int x = 0; x < gol->grid_width / gol->grid_gap; x++) {
+        for (int y = 0; y < gol->grid_height / gol->grid_gap; y++) {
+            // Calculate the index in the 1D array
+            int index = x * (gol->grid_height / gol->grid_gap) + y;
+
+            if (gol->grid[index].active) {
                 SDL_Rect rect = {
-                    gol->grid[x][y].limit_x - GOL::grid_gap, //location x
-                    gol->grid[x][y].limit_y - GOL::grid_gap, //location y
-                    GOL::grid_gap, GOL::grid_gap //h, w
+                        gol->grid[index].limit_x - gol->grid_gap, // location x
+                        gol->grid[index].limit_y - gol->grid_gap, // location y
+                        gol->grid_gap, gol->grid_gap // h, w
                 };
                 SDL_RenderFillRect(renderer, &rect);
             }
@@ -38,13 +40,14 @@ void Renderer::DrawGrid(GOL* gol) {
     SDL_RenderPresent(renderer);
 }
 
+
 void Renderer::render(GOL* gol) {
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
     SDL_RenderClear(renderer);
     DrawGrid(gol);
     if (gol->isStarted) {
         gol->tick();
-        std::this_thread::sleep_for(std::chrono::milliseconds(GOL::gameSpeed));
+        std::this_thread::sleep_for(std::chrono::milliseconds(gol->gameSpeed));
     }
 }
 
