@@ -3,15 +3,10 @@ project(GOL)
 
 set(CMAKE_CXX_STANDARD 23)
 
-# Add directories libraries
-set(CMAKE_PREFIX_PATH "C:/SDK/sdl2;C:/SDK/SDL2_image")
-
 # Find libraries
-find_package(SDL2_image REQUIRED)
 find_package(SDL2 REQUIRED)
 
 # Add include directories
-include_directories(${SDL2_IMAGE_INCLUDE_DIRS})
 include_directories(${SDL2_INCLUDE_DIRS})
 
 # Source files
@@ -26,4 +21,4 @@ set(SOURCES
 add_executable(GOL ${SOURCES})
 
 # Link against libraries
-target_link_libraries(GOL ${SDL2_MAIN_LIBRARIES} ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARIES})
+target_link_libraries(GOL ${SDL2_MAIN_LIBRARIES} ${SDL2_LIBRARIES})

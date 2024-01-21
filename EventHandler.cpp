@@ -49,8 +49,6 @@ void EventHandler::handleEvents(GOL* gol, bool* play) {
 }
 
 void EventHandler::handleClick(GOL* gol, int key) {
-    if (gol->isStarted) return;
-
     if (key == SDL_BUTTON_LEFT) leftMouseDown = true;
     else rightMouseDown = true;
 
