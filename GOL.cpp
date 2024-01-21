@@ -35,14 +35,14 @@ GOL::~GOL()
     std::cout << "\n--------------------------- " << std::endl;
 }
 
-void GOL::premade(int shape) const {
-    if (shape == 1) {
+void GOL::createShape(GOL::ShapeType shape) const {
+    if (shape == ShapeType::PERIMETER_BOX) {
         for (int x = 0; x < gridWidth / cellSize; x++)
             for (int y = 0; y < gridHeight / cellSize; y++)
                 if (x == 0 || y == 0 || x == gridWidth / cellSize - 1 || y == gridHeight / cellSize - 1)
                     grid[x * (gridHeight / cellSize) + y].active = true;
     }
-    else if (shape == 2) {
+    else if (shape == ShapeType::MIDDLE_LINE) {
         for (int x = 0; x < gridWidth / cellSize; x++)
             for (int y = 0; y < gridHeight / cellSize; y++)
                 if (x == (gridWidth / cellSize - 1) / 2)

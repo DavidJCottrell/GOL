@@ -20,8 +20,13 @@ public:
         bool active;
     };
 
+    enum ShapeType {
+        PERIMETER_BOX,
+        MIDDLE_LINE
+    };
+
     void clearGrid() const;
-    void premade(int shape) const; //Draw premade configurations
+    void createShape(ShapeType shape) const; //Draw premade configurations
 
     int gridWidth;
     int gridHeight;

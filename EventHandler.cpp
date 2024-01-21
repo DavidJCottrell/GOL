@@ -34,11 +34,11 @@ void EventHandler::handleEvents(GOL* gol, bool* play) {
             gol->clearGrid(); //Clear grid
             std::cout << "-- Grid cleared" << std::endl;
             break;
-        case SDLK_q:
-            gol->premade(1);
-            break;
         case SDLK_w:
-            gol->premade(2);
+            gol->createShape(GOL::ShapeType::MIDDLE_LINE);
+            break;
+        case SDLK_q:
+            gol->createShape(GOL::ShapeType::PERIMETER_BOX);
             break;
         default:
             break;
