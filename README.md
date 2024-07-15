@@ -1,7 +1,11 @@
-### Setup
-`sudo apt-get update && sudo apt-get install build-essential`
+## Create the build directory
 
-`sudo apt-get install cmake`
+`mkdir build && cd build`
 
-### Dependency
-`sudo apt-get install libsdl2-dev`
+## Install dependencies with conan
+
+`conan install .. --build=missing --output-folder=.`
+
+## Generate build files
+
+`cmake .. -DCMAKE_TOOLCHAIN_FILE=conan_toolchain.cmake -DCMAKE_BUILD_TYPE=Release`
