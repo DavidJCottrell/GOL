@@ -6,12 +6,12 @@
 class Renderer
 {
 public:
-	Renderer(const char* title, int xpos, int ypos, int width, int height);
+	Renderer(const char *title, int xpos, int ypos, int width, int height);
 	~Renderer();
-	void render(GOL* gol);
-private:
-	void DrawGrid(GOL* gol);
-	SDL_Window* window;
-	SDL_Renderer* renderer;
-};
+	void render(GOL *gol);
 
+private:
+	void DrawGrid(GOL *gol);
+	SDL_Window *window;
+	SDL_Renderer *renderer;
+};
