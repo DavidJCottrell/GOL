@@ -8,25 +8,25 @@
 class GOL
 {
 public:
-	GOL();
+    GOL();
     GOL(int width, int height, int gap, int game_speed);
-	~GOL();
+    ~GOL();
 
-    struct cell {
-        int limitX;
-        int limitY;
+    struct cell
+    {
         int x; // X position in grid
         int y; // Y position in grid
         bool active;
     };
 
-    enum ShapeType {
+    enum ShapeType
+    {
         PERIMETER_BOX,
         MIDDLE_LINE
     };
 
     void clearGrid() const;
-    void createShape(ShapeType shape) const; //Draw premade configurations
+    void createShape(ShapeType shape) const; // Draw premade configurations
 
     int gridWidth;
     int gridHeight;
@@ -34,7 +34,7 @@ public:
     unsigned int gameSpeed;
     bool isStarted = false;
 
-    cell* grid{};
+    cell *grid{};
 
     void tick() const;
 
@@ -45,4 +45,3 @@ private:
     static const unsigned int defaultGameSpeed = 100;
     void initializeGrid();
 };
-
