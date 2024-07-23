@@ -18,10 +18,9 @@ include_directories(${PROJECT_SOURCE_DIR}/include)
 find_package(SDL2 REQUIRED)
 
 set(SOURCES
-        src/EventHandler.cpp
         src/main.cpp
-        src/Renderer.cpp
-        src/GOL.cpp
+        src/Cell.cpp
+        src/Board.cpp
 )
 
 add_executable(GOL ${SOURCES})
