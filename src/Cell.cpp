@@ -6,10 +6,9 @@ void Cell::setPosition(int x, int y)
     gridPosY = y;
 
     rect = {
-        gridPosX * CELL_SIZE, // location x
-        gridPosY * CELL_SIZE, // location y
-        CELL_SIZE, CELL_SIZE  // w, h
-    };
+        gridPosX * CELL_SIZE,
+        gridPosY * CELL_SIZE,
+        CELL_SIZE, CELL_SIZE};
 }
 
 void Cell::render(SDL_Renderer *renderer)
